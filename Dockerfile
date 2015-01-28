@@ -17,8 +17,7 @@ RUN	apt-key adv --keyserver hkp://keys.gnupg.net --recv-key 73571BB9 && \
 	apt-get install -y -t wheezy-backports cython
 
 WORKDIR	/usr/src
-RUN	git clone git://github.com/machinekit/machinekit.git && \
-	cd machinekit && \
+RUN	git clone git://github.com/machinekit/machinekit.git
 
 WORKDIR	machinekit
 RUN	./debian/configure -prx && \
