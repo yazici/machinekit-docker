@@ -7,7 +7,7 @@ RUN	apt-key adv --keyserver hkp://keys.gnupg.net --recv-key 73571BB9 && \
 		> /etc/apt/sources.list.d/machinekit.list' && \
 	sh -c 'echo "deb http://http.debian.net/debian wheezy-backports main" \
 		>> /etc/apt/sources.list' && \
-	apt-get update &&\
+	apt-get update && \
 	apt-get install -y --no-install-recommends \
 		git \
 		devscripts \
@@ -15,3 +15,13 @@ RUN	apt-key adv --keyserver hkp://keys.gnupg.net --recv-key 73571BB9 && \
 		equivs \
 		lsb-release && \
 	apt-get install -y -t wheezy-backports cython
+
+WORKDIR	/usr/src
+RUN	git clone git://github.com/machinekit/machinekit.git && \
+	cd machinekit && \
+
+WORKDIR	machinekit
+RUN	./debian/configure -prx && \
+	yes | mk-build-deps -i -r && \
+	debuild -eDEB_BUILD_OPTIONS="parallel=4" -us -uc -b -j4
+
