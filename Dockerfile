@@ -21,7 +21,9 @@ WORKDIR	/usr/src
 RUN	git clone git://github.com/machinekit/machinekit.git
 
 WORKDIR	machinekit
-RUN	./debian/configure -prx && \
+RUN	./debian/configure -prx \
+	    -X 3.8-1-xenomai.x86-amd64 \
+	    -R 3.8-1-rtai.x86-amd64 && \
 	yes | mk-build-deps -i -r && \
 	debuild -eDEB_BUILD_OPTIONS="parallel=4" -us -uc -b -j4
 
