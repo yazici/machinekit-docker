@@ -1,5 +1,6 @@
 FROM debian
-MAINTAINER GP Orcullo <kinsamanka@gmail.com>
+MAINTAINER John Morris <john@zultron.com>
+# Forked from GP Orcullo, https://github.com/kinsamanka/MkDocker
 
 # install required dependencies
 RUN	apt-key adv --keyserver hkp://keys.gnupg.net --recv-key 73571BB9 && \
